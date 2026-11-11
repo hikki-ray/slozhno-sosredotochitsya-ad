@@ -297,3 +297,33 @@
     object-fit: cover;
   }
 }
+
+@media (width >= 1024px) {
+  .header {
+    grid-template-rows: 1fr 1fr 1fr;
+    align-content: normal;
+  }
+
+  .header__theme-menu {
+    justify-self: center;
+    align-self: start;
+  }
+
+  .header__theme-menu-list {
+    flex-direction: row;
+  }
+
+  .header__title {
+    align-self: center;
+  }
+
+  .header__paragraph {
+    align-self: end;
+    margin-block-end: 15vh; 
+  }
+
+  .section:nth-of-type(2) .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
