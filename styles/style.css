@@ -1,6 +1,10 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .page {
   margin: 0 auto;
-  padding: var(--page-padding);
   font-family: var(--main-font);
   font-size: var(--main-text-size);
   color: var(--text-color);
@@ -17,9 +21,10 @@
 /* Шапка */
 .header {
   display: grid;
-  grid-template-rows: auto auto auto; 
+  grid-template-rows: auto auto auto;
   align-content: space-evenly;
-  block-size: calc(100vh - 2 * var(--page-padding));
+  padding: var(--page-padding);
+  block-size: 100vh;
   position: relative;
 }
 
@@ -57,8 +62,8 @@
 .header__rec {
   display: none;
   position: absolute;
-  inset-block-start: 0px;
-  inset-inline-end: 10px;
+  inset-block-start: var(--page-padding);
+  inset-inline-end: calc(var(--page-padding) + 10px);
   color: var(--accent-color, #ff0070);
   font-size: 18px;
   text-transform: uppercase;
@@ -90,15 +95,15 @@
 }
 
 .decorated-zone::before {
-  inset-block-start: 0px;
-  inset-inline-end: 0px;
+  inset-block-start: var(--page-padding);
+  inset-inline-end: var(--page-padding);
   border-block-end: none;
   border-inline-start: none;
 }
 
 .decorated-zone::after {
-  inset-block-end: 0px;
-  inset-inline-start: 0px;
+  inset-block-end: var(--page-padding);
+  inset-inline-start: var(--page-padding);
   border-block-start: none;
   border-inline-end: none;
 }
@@ -164,15 +169,15 @@
   text-decoration: none;
   text-shadow: 2px 1px 0 var(--accent-color);
   cursor: pointer;
+}
 
-  &:hover {
-    border-block-end: 1px solid currentColor;
-  }
+.card__link:hover {
+  border-block-end: 1px solid currentColor;
+}
 
-  &:focus-visible {
-    outline: 1px solid currentColor;
-    outline-offset: 1px;
-  }
+.card__link:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 1px;
 }
 
 /* Кнопки */
@@ -185,17 +190,17 @@
   background-color: transparent;
   text-transform: lowercase;
   cursor: pointer;
+}
 
-  &:hover {
-    border-color: color-mix(in srgb, currentColor 40%, transparent);
-  }
+.header__theme-menu-button:hover {
+  border-color: color-mix(in srgb, currentColor 40%, transparent);
+}
 
-  &:focus,
-  &:focus-visible {
-    outline: none;
-    border-color: transparent;
-    border-block-end: 1px solid currentColor;
-  }
+.header__theme-menu-button:focus,
+.header__theme-menu-button:focus-visible {
+  outline: none;
+  border-color: transparent;
+  border-block-end: 1px solid currentColor;
 }
 
 .header__theme-menu-button_active {
@@ -207,6 +212,7 @@
 .gallery {
   display: grid;
   grid-template-columns: 1fr;
+  margin-top: -10px;
   gap: var(--image-gap);
 }
 
@@ -220,7 +226,8 @@
 .footer {
   display: grid;
   place-items: center;
-  block-size: calc(100vh - 2 * var(--page-padding));
+  block-size: 100vh;
+  padding: var(--page-padding);
 }
 
 .footer__title {
@@ -235,9 +242,13 @@
   :root {
     --main-title-size: clamp(7.5rem, 0.5625rem + 14.4531vw, 9.8125rem);
     --page-padding: 20px;
-    --content-padding: 60px 0px;
+    --content-padding: 60px 20px;
     --content-gap: 80px;
     --image-gap: 20px;
+  }
+
+  .header__title {
+    margin-inline-start: -20px;
   }
 
   .header__paragraph {
@@ -254,16 +265,17 @@
     max-inline-size: 30%;
   }
 
-  .gallery__image {
-    inline-size: 100%;
-    block-size: 100%;
-    object-fit: contain;
-  }
-
   .gallery {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, auto);
+    margin-top: 0px;
+  }
+
+  .gallery__image {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
   }
 
   .gallery__image:nth-child(1) {
@@ -290,12 +302,6 @@
     grid-column: 2 / 4;
     grid-row: 3;
   }
-
-  .gallery__image {
-    inline-size: 100%;
-    block-size: 100%;
-    object-fit: cover;
-  }
 }
 
 @media (width >= 1024px) {
@@ -319,7 +325,7 @@
 
   .header__paragraph {
     align-self: end;
-    margin-block-end: 15vh; 
+    margin-block-end: 15vh;
   }
 
   .section:nth-of-type(2) .cards {
